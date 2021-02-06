@@ -140,7 +140,7 @@ public class DriveTrain extends SubsystemBase {
 
   public void tankDriveVolts(double leftVolts, double rightVolts) {
     leftMotorGroup.setVoltage(leftVolts);
-    rightMotorGroup.setVoltage(-rightVolts);
+    rightMotorGroup.setVoltage(rightVolts);
     drive.feed();
   }
 

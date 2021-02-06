@@ -96,6 +96,11 @@ public class RobotContainer {
     m_chooser.addOption("Score from Left", new AutoScoreFromLeftSide(drivetrain, powerCellSystem));
     m_chooser.addOption("Score from Right", new AutoScoreFromRightSide(drivetrain, powerCellSystem));
     m_chooser.addOption("Drive past Base line", new AutoDrivePastBaseLine(drivetrain));
+    m_chooser.addOption("Auto Pathfinder", new AutoPathFinder(drivetrain, "MoveForward"));
+    m_chooser.addOption("Turn 90", new AutoRotate(drivetrain, 90, 0.5));
+    m_chooser.addOption("Turn -90", new AutoRotate(drivetrain, -90, 0.5));
+    
+    m_chooser.addOption("SQUAREZZZ", new AutoSquare(drivetrain));
 
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Commands").add(m_chooser);
