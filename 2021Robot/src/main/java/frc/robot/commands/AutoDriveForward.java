@@ -20,6 +20,37 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class AutoDriveForward extends CommandBase {
   private final DriveTrain m_drivetrain;
 
+  //start of test 
+
+//   static final double kP = 0.024;
+//   static final double kI = 0.04;
+//   static final double kD = 0.00;
+//   private DriveTrain driveTrain;
+//   private double setAngle;
+
+//   /** Creates a new RotatePID. 
+//  * @return */
+//   public void RotatePID(DriveTrain m_DriveTrain, double m_setAngle) {
+//     super(
+//         // The controller that the command will use
+//         new PIDController(m_DriveTrain.getP(), m_DriveTrain.getI(), m_DriveTrain.getD()),
+//         // This should return the measurement
+//         () -> m_DriveTrain.getAngle(),
+//         // This should return the setpoint (can also be a constant)
+//         () -> m_setAngle,
+//         // This uses the output
+//         output -> {
+//           // Use the output here
+//           SmartDashboard.putNumber("pid output", output);
+//           m_DriveTrain.drive(0, output);
+//         });
+
+//     driveTrain = m_DriveTrain;
+//     setAngle = m_setAngle;
+    
+//     addRequirements(driveTrain);
+//         //end of test 
+
   /**
    * Creates a new ExampleCommand.
    *
@@ -44,7 +75,8 @@ public class AutoDriveForward extends CommandBase {
   }
 
   private double kAngleSetpoint = 0;
-  private double  kP = 0.05;
+  private double kP = 0.05;
+
   @Override
   public void execute() {
 

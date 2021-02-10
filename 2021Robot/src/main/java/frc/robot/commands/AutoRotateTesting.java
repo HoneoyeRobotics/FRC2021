@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
  * An example command that uses an example subsystem.
  */
-public class AutoRotate extends CommandBase {
+public class AutoRotateTesting extends CommandBase {
   private final DriveTrain m_drivetrain;
 
   /**
@@ -26,7 +26,7 @@ public class AutoRotate extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AutoRotate(DriveTrain drivetrain, double degrees, double speed) {
+  public AutoRotateTesting(DriveTrain drivetrain, double degrees, double speed) {
     m_drivetrain = drivetrain;
     addRequirements(m_drivetrain);
     this.degreesChanged = degrees;
@@ -41,10 +41,8 @@ public class AutoRotate extends CommandBase {
   private double endDegrees = 0;
   //turning value is equal to the difference
 
-
   private int modifier = 1;
   
-
   @Override
   public void initialize() {
     
@@ -57,6 +55,7 @@ public class AutoRotate extends CommandBase {
   private double kAngleSetpoint = 0;
   private double  kP = 0.05;
   @Override
+  
   public void execute() {
 
     double current = m_drivetrain.getAngle();
@@ -75,7 +74,7 @@ public class AutoRotate extends CommandBase {
     SmartDashboard.putNumber("turningValue", turningValue);
   }
 
-  private final double diff = 3;
+  private final double centerDeviation = 3;
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -85,8 +84,8 @@ public class AutoRotate extends CommandBase {
     SmartDashboard.putNumber("current", current);
     //s=100; e=20; c=80
     //if(endDegrees <= startDegrees)
-      return current <= endDegrees + diff  
-          && current >= endDegrees - diff  ;
+      return current <= endDegrees + centerDeviation  
+          && current >= endDegrees - centerDeviation  ;
     // else
     // //s = 100; e=150; c=130; 147-153
     //   return current >= endDegrees + diff  

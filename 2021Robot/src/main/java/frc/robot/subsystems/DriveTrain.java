@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 
@@ -182,7 +183,8 @@ public class DriveTrain extends SubsystemBase {
   private double lastSpeed = 0;
   private double lastRotation = 0;
 
-  public void drive(double xSpeed, double zRotation) {
+  public void 
+  drive(double xSpeed, double zRotation) {
     lastSpeed = xSpeed;
     lastRotation = zRotation;
     drive.arcadeDrive(xSpeed, zRotation);
@@ -224,5 +226,22 @@ public class DriveTrain extends SubsystemBase {
 
   public boolean isReversed(){
     return reverseDirection;
+  }
+
+  
+  private NetworkTableEntry kP = Shuffleboard.getTab("Commands").add("kP", 0.03).getEntry();
+  
+  private NetworkTableEntry kI = Shuffleboard.getTab("Commands").add("kI", 0.05).getEntry();
+  private NetworkTableEntry kD = Shuffleboard.getTab("Commands").add("kD", 0.016).getEntry();
+  public double getP(){
+
+    SmartDashboard.putNumber("kayP", kP.getDouble(1));
+    return kP.getDouble(1);
+  }
+  public double getI(){
+    return kI.getDouble(1);
+  }
+  public double getD(){
+    return kD.getDouble(1);
   }
 }

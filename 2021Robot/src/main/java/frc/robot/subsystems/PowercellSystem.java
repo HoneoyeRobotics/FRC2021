@@ -34,6 +34,7 @@ public class PowercellSystem extends SubsystemBase {
     Compressor compressor = new Compressor(Constants.CANID_PCM);
     pressureReader = new AnalogInput(0);
     compressor.setClosedLoopControl(true);
+    
   }
 
   public boolean getArmUp(){

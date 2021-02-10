@@ -97,8 +97,9 @@ public class RobotContainer {
     m_chooser.addOption("Score from Right", new AutoScoreFromRightSide(drivetrain, powerCellSystem));
     m_chooser.addOption("Drive past Base line", new AutoDrivePastBaseLine(drivetrain));
     m_chooser.addOption("Auto Pathfinder", new AutoPathFinder(drivetrain, "MoveForward"));
-    m_chooser.addOption("Turn 90", new AutoRotate(drivetrain, 90, 0.5));
-    m_chooser.addOption("Turn -90", new AutoRotate(drivetrain, -90, 0.5));
+    m_chooser.addOption("Turn 90",  new RotatePID(drivetrain, 90));
+    m_chooser.addOption("Turn 0", new RotatePID(drivetrain, 0));
+    m_chooser.addOption("Turn 180", new RotatePID(drivetrain, 180));
     
     m_chooser.addOption("SQUAREZZZ", new AutoSquare(drivetrain));
 
