@@ -74,6 +74,7 @@ public class RobotContainer {
     ArcadeDrive arcadeDrive = new ArcadeDrive(() -> driverJoystick.getRawAxis(1) * (drivetrain.isReversed() ? 1 : -1),
         () -> driverJoystick.getRawAxis(3) - driverJoystick.getRawAxis(2), drivetrain);
     drivetrain.setDefaultCommand(arcadeDrive);
+    //powerCellSystem.setDefaultCommand(GatherPowercells);
 
     // Configure the button bindings
     configureCoDriverButtonBindings();
@@ -101,10 +102,11 @@ public class RobotContainer {
     m_chooser.addOption("Turn 0", new RotatePID(drivetrain, 0));
     m_chooser.addOption("Turn 180", new RotatePID(drivetrain, 180));
     m_chooser.addOption("SQUAREZZZ", new AutoSquare(drivetrain));
-    m_chooser.addOption("Path Red A", new AutoPathRedA(drivetrain));
-    m_chooser.addOption("Path Red B", new AutoPathRedB(drivetrain));
-    m_chooser.addOption("Path Blue A", new AutoPathBlueA(drivetrain));
-    m_chooser.addOption("Path Blue B", new AutoPathBlueB(drivetrain));
+    m_chooser.addOption("Path Red A", new AutoPathRedA(drivetrain, powerCellSystem));
+    m_chooser.addOption("Path Red B", new AutoPathRedB(drivetrain, powerCellSystem));
+    m_chooser.addOption("Path Blue A", new AutoPathBlueA(drivetrain, powerCellSystem));
+    m_chooser.addOption("Path Blue B", new AutoPathBlueB(drivetrain, powerCellSystem));
+    m_chooser.addOption("Auto Forward Test Distance", new AutoForwardDistanceTest(drivetrain));
 
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Commands").add(m_chooser);

@@ -7,61 +7,35 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.PowercellSystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoPathBlueA extends SequentialCommandGroup {
+public class AutoForwardDistanceTest extends SequentialCommandGroup {
   /** Creates a new AutoSquare. */
   
   private final DriveTrain m_drivetrain;
-  private final PowercellSystem m_powerCellSystem;
-
-  public AutoPathBlueA(DriveTrain drivetrain, PowercellSystem powerCellSystem) {
+  public AutoForwardDistanceTest(DriveTrain drivetrain) {
     double waitTime = 0.25;
     double rotateTimeout = 1.5;
     //double rotateAngle = 90;
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     m_drivetrain = drivetrain;
-    m_powerCellSystem = powerCellSystem;
-
     addCommands(
-    new SequentialCommandGroup(
-      new WaitCommand(5),
-      new GatherPowercells(powerCellSystem).withTimeout(5),
-      new WaitCommand(6),
-      new GatherPowercells(powerCellSystem).withTimeout(5),
-      new WaitCommand(8),
-      new GatherPowercells(powerCellSystem).withTimeout(5)
-    ),
-
-    new SequentialCommandGroup(
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
       //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 18.435),
+      new RotatePID(drivetrain, 45),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 189.72, 0.5),
+      new AutoDriveForward(drivetrain, 60, 0.5),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -108.435),
+      new RotatePID(drivetrain, -180),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 94.872, 0.5),
-      new WaitCommand(waitTime),
-      //reached point
-      new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 98.13),
-      new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 67.08, 0.5),
-      new WaitCommand(waitTime),
-      //reached point
-      new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 153.43),
-      new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 270, 0.5)));
+      new AutoDriveForward(drivetrain, 60, 0.5),
+      new WaitCommand(waitTime));
       //reached point
   }
 }
