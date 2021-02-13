@@ -7,6 +7,13 @@
 
 package frc.robot.subsystems;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -46,28 +53,45 @@ public class DriveTrain extends SubsystemBase {
   private final Encoder rightEncoder;
   private final AHRS navx;
   private final DifferentialDriveOdometry odometry;
-  private boolean reverseDirection=   false;
+  private boolean reverseDirection = false;
   private ArrayList<RecordedDrive> autoDrive;
 
-
-  public void clearAutoDrive(){
-    if(autoDrive == null)
+  public void clearAutoDrive() {
+    if (autoDrive == null)
       autoDrive = new ArrayList<RecordedDrive>();
     autoDrive.clear();
   }
 
-  public void addAutoDrive(RecordedDrive item){
+  public void addAutoDrive(RecordedDrive item) {
     autoDrive.add(item);
   }
 
-public int autoDriveSize(){
-  return autoDrive.size();
-}
-  
-  public RecordedDrive getAutoDrive(int item){
-    return autoDrive.get(item);
+  public int autoDriveSize() {
+    return autoDrive.size();
   }
 
+  public RecordedDrive getAutoDrive(int item) {
+    return autoDrive.get(item);
+  }
+private final String fileName = "/home/lvuser/AutoRecord.txt";
+  public void saveAutoDrive() throws FileNotFoundException, IOException {
+    
+    var f = new File(fileName);
+    if(!f.exists()){
+      f.createNewFile();
+    }
+  
+      var outputStream = new ObjectOutputStream(new FileOutputStream(fileName));
+      outputStream.writeObject(autoDrive);
+  
+  }
+
+  public void loadAutoDrive() throws FileNotFoundException, IOException, ClassNotFoundException {
+
+    var inputStream = new ObjectInputStream(new FileInputStream(fileName));
+    autoDrive = (ArrayList<RecordedDrive>)(inputStream.readObject());
+
+  }
   public DriveTrain() {
 
 

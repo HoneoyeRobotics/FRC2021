@@ -66,6 +66,7 @@ public boolean isFinished() {
 public void end(boolean interrupted) {
   m_drivetrain.drive(0, 0);
   m_powercellSystem.RunIntake(0);
+  m_drivetrain.saveAutoDrive();
   SmartDashboard.putNumber("AutoDriveRecords", m_drivetrain.autoDriveSize());
 }
 }
