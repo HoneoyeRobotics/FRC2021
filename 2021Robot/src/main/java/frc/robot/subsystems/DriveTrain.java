@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.ArrayList;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -29,6 +31,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 
 import frc.robot.Constants;
+import frc.robot.commands.RecordedDrive;
 
 public class DriveTrain extends SubsystemBase {
   private final SpeedController leftMotorGroup;
@@ -44,6 +47,26 @@ public class DriveTrain extends SubsystemBase {
   private final AHRS navx;
   private final DifferentialDriveOdometry odometry;
   private boolean reverseDirection=   false;
+  private ArrayList<RecordedDrive> autoDrive;
+
+
+  public void clearAutoDrive(){
+    if(autoDrive == null)
+      autoDrive = new ArrayList<RecordedDrive>();
+    autoDrive.clear();
+  }
+
+  public void addAutoDrive(RecordedDrive item){
+    autoDrive.add(item);
+  }
+
+public int autoDriveSize(){
+  return autoDrive.size();
+}
+  
+  public RecordedDrive getAutoDrive(int item){
+    return autoDrive.get(item);
+  }
 
   public DriveTrain() {
 

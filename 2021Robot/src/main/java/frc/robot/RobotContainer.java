@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 // import java.io.IOException;
@@ -108,6 +109,10 @@ public class RobotContainer {
     m_chooser.addOption("Path Blue B", new AutoPathBlueB(drivetrain, powerCellSystem));
     m_chooser.addOption("Auto Forward Test Distance", new AutoForwardDistanceTest(drivetrain));
 
+
+    Shuffleboard.getTab("Commands").add(new ArcadeDriveRecord(() -> driverJoystick.getRawAxis(1) * (drivetrain.isReversed() ? 1 : -1),
+    () -> driverJoystick.getRawAxis(3) - driverJoystick.getRawAxis(2), drivetrain));
+    Shuffleboard.getTab("Commands").add(new ArcadeDrivePlay(drivetrain));
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Commands").add(m_chooser);
 
