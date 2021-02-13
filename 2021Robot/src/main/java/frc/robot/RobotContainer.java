@@ -109,10 +109,11 @@ public class RobotContainer {
     m_chooser.addOption("Path Blue B", new AutoPathBlueB(drivetrain, powerCellSystem));
     m_chooser.addOption("Auto Forward Test Distance", new AutoForwardDistanceTest(drivetrain));
 
+    var arcadeDriveRecord = new ArcadeDriveRecord(() -> driverJoystick.getRawAxis(1) * (drivetrain.isReversed() ? 1 : -1),
+    () -> driverJoystick.getRawAxis(3) - driverJoystick.getRawAxis(2), drivetrain, powerCellSystem, () -> driverJoystick.getRawButton(4) /* y*/);
 
-    Shuffleboard.getTab("Commands").add(new ArcadeDriveRecord(() -> driverJoystick.getRawAxis(1) * (drivetrain.isReversed() ? 1 : -1),
-    () -> driverJoystick.getRawAxis(3) - driverJoystick.getRawAxis(2), drivetrain));
-    Shuffleboard.getTab("Commands").add(new ArcadeDrivePlay(drivetrain));
+    Shuffleboard.getTab("Commands").add(arcadeDriveRecord);
+    Shuffleboard.getTab("Commands").add(new ArcadeDrivePlay(drivetrain, powerCellSystem));
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Commands").add(m_chooser);
 
