@@ -23,28 +23,30 @@ public class AutoPathBlueA extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     m_drivetrain = drivetrain;
     addCommands(
+      //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
+      //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 90),
+      new RotatePID(drivetrain, 18.435),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 50, 0.5),
+      new AutoDriveForward(drivetrain, 15.81, 0.5),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 90),
+      new RotatePID(drivetrain, -108.435),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 50, 0.5),
+      new AutoDriveForward(drivetrain, 7.906, 0.5),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 90),
+      new RotatePID(drivetrain, 98.13),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 50, 0.5),
+      new AutoDriveForward(drivetrain, 5.59, 0.5),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 90),
+      new RotatePID(drivetrain, 153.43),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 50, 0.5));
+      new AutoDriveForward(drivetrain, 22.5, 0.5));
       //reached point
   }
 }
