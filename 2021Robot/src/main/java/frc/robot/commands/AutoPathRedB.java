@@ -29,14 +29,14 @@ public class AutoPathRedB extends ParallelCommandGroup {
 
     addCommands(
       //new GatherPowercells(powerCellSystem),
-      new SequentialCommandGroup(
-        new WaitCommand(5),
-        new GatherPowercells(powerCellSystem).withTimeout(5),
-        new WaitCommand(6),
-        new GatherPowercells(powerCellSystem).withTimeout(5),
-        new WaitCommand(8),
-        new GatherPowercells(powerCellSystem).withTimeout(5)
-      ),
+      // new SequentialCommandGroup(
+      //   new WaitCommand(5),
+      //   new GatherPowercells(powerCellSystem).withTimeout(2.5),
+      //   new WaitCommand(12),
+      //   new GatherPowercells(powerCellSystem).withTimeout(2.5),
+      //   new WaitCommand(8),
+      //   new GatherPowercells(powerCellSystem).withTimeout(2.5)
+      // ),
 
       new SequentialCommandGroup(
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
@@ -45,18 +45,21 @@ public class AutoPathRedB extends ParallelCommandGroup {
       new RotatePID(drivetrain, -18.435),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 94.872, 0.5),
+      new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
       new RotatePID(drivetrain, 71.565),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 84.852, 0.5),
+      new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
       new RotatePID(drivetrain, -90),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 84.852, 0.5),
+      new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),

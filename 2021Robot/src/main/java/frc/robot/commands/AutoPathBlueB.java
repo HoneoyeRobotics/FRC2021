@@ -28,34 +28,39 @@ public class AutoPathBlueB extends SequentialCommandGroup {
     m_powerCellSystem = powerCellSystem;
 
     addCommands(
-    new SequentialCommandGroup(
-      new WaitCommand(5),
-      new GatherPowercells(powerCellSystem).withTimeout(5),
-      new WaitCommand(6),
-      new GatherPowercells(powerCellSystem).withTimeout(5),
-      new WaitCommand(8),
-      new GatherPowercells(powerCellSystem).withTimeout(5)
-    ),
+    // new SequentialCommandGroup(
+    //   new WaitCommand(5),
+    //   new GatherPowercells(powerCellSystem).withTimeout(5),
+    //   new WaitCommand(6),
+    //   new GatherPowercells(powerCellSystem).withTimeout(5),
+    //   new WaitCommand(8),
+    //   new GatherPowercells(powerCellSystem).withTimeout(5)
+    // ),
 
     new SequentialCommandGroup(
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
       //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
       new ResetOdometry(drivetrain),
+      //needs to be messed with
       new RotatePID(drivetrain, 9.462),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 182.484, 0.5),
+      new AutoDriveForward(drivetrain, 170.484, 0.5),
+      new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
+      //needs to be messed with
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -80.54),
+      new RotatePID(drivetrain, -55),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 84.852, 0.5),
+      new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
       new RotatePID(drivetrain, 90),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 84.852, 0.5),
+      new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
