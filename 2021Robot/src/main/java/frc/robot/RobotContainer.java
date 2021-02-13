@@ -100,8 +100,11 @@ public class RobotContainer {
     m_chooser.addOption("Turn 90",  new RotatePID(drivetrain, 90));
     m_chooser.addOption("Turn 0", new RotatePID(drivetrain, 0));
     m_chooser.addOption("Turn 180", new RotatePID(drivetrain, 180));
-    
     m_chooser.addOption("SQUAREZZZ", new AutoSquare(drivetrain));
+    m_chooser.addOption("Path Red A", new AutoPathRedA(drivetrain));
+    m_chooser.addOption("Path Red B", new AutoPathRedB(drivetrain));
+    m_chooser.addOption("Path Blue A", new AutoPathBlueA(drivetrain));
+    m_chooser.addOption("Path Blue B", new AutoPathBlueB(drivetrain));
 
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Commands").add(m_chooser);
