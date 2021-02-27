@@ -28,38 +28,39 @@ public class AutoPathRedA extends SequentialCommandGroup {
     m_powerCellSystem = powerCellSystem;   
     
     addCommands(
-    new SequentialCommandGroup(
-      new WaitCommand(5),
-      new GatherPowercells(powerCellSystem).withTimeout(5),
-      new WaitCommand(6),
-      new GatherPowercells(powerCellSystem).withTimeout(5),
-      new WaitCommand(8),
-      new GatherPowercells(powerCellSystem).withTimeout(5)
-    ),
+    // new SequentialCommandGroup(
+    //   new WaitCommand(5),
+    //   new GatherPowercells(powerCellSystem).withTimeout(5),
+    //   new WaitCommand(6),
+    //   new GatherPowercells(powerCellSystem).withTimeout(5),
+    //   new WaitCommand(8),
+    //   new GatherPowercells(powerCellSystem).withTimeout(5)
+    // ),
 
     new SequentialCommandGroup(
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
       //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 0),
-      new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 90, 0.5),
+      new AutoDriveForward(drivetrain, 70, 0.5),
+      new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 26.565),
+      new RotatePID(drivetrain, 40),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 67.08, 0.5),
+      new AutoDriveForward(drivetrain, 50, 0.5),
+      new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -98.135),
+      new RotatePID(drivetrain, -113),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 95.592, 0.5),
+      new AutoDriveForward(drivetrain, 71.592, 0.5),
+      new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -126.87),
+      new RotatePID(drivetrain, -120),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 189.72, 0.5)));
       //reached point

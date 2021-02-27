@@ -277,7 +277,6 @@ private final String fileName = "/home/lvuser/AutoRecord.txt";
 
   
   private NetworkTableEntry kP = Shuffleboard.getTab("Commands").add("kP", 0.03).getEntry();
-  
   private NetworkTableEntry kI = Shuffleboard.getTab("Commands").add("kI", 0.05).getEntry();
   private NetworkTableEntry kD = Shuffleboard.getTab("Commands").add("kD", 0.016).getEntry();
   public double getP(){

@@ -30,7 +30,7 @@ public class AutoRotate extends CommandBase {
     m_drivetrain = drivetrain;
     addRequirements(m_drivetrain);
     this.degreesChanged = degrees;
-    this.speed = speed;
+    this.speed = speed * 1.7;
     if(degrees < 0)
       modifier = -1;
   }
@@ -75,7 +75,7 @@ public class AutoRotate extends CommandBase {
     SmartDashboard.putNumber("turningValue", turningValue);
   }
 
-  private final double diff = 3;
+  private final double diff = 5;
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

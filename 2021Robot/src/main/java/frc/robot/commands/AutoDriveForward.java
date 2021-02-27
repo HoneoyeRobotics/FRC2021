@@ -61,8 +61,10 @@ public class AutoDriveForward extends CommandBase {
     addRequirements(m_drivetrain);
     this.distance = distance;
     this.speed = speed;
+    this.stephenSpeed = speed * 1.5;
   }
   private final double speed;
+  private final double stephenSpeed;
   private double distance = 0;
   private double startEncoder = 0;
   private double endEncoder = 0;
@@ -82,8 +84,8 @@ public class AutoDriveForward extends CommandBase {
 
     double turningValue = (kAngleSetpoint - m_drivetrain.getAngle()) * kP;
     // Invert the direction of the turn if we are going backwards
-    turningValue = Math.copySign(turningValue, speed);
-    m_drivetrain.drive(speed, turningValue);
+    turningValue = Math.copySign(turningValue, stephenSpeed);
+    m_drivetrain.drive(stephenSpeed, turningValue);
   }
 
   // Make this return true when this Command no longer needs to run execute()

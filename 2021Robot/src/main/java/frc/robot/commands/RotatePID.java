@@ -50,7 +50,7 @@ public class RotatePID extends PIDCommand {
 
     driveTrain = m_DriveTrain;
     setAngle = m_setAngle;
-    getController().setTolerance(0.5);
+    getController().setTolerance(1);
     addRequirements(driveTrain);
     
     // Use addRequirements() here to declare subsystem dependencies.

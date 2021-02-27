@@ -36,7 +36,9 @@ public class AutoSquare extends SequentialCommandGroup {
     new WaitCommand(waitTime),
     new RotatePID(drivetrain, 270),
     new WaitCommand(waitTime),
-    new AutoDriveForward(drivetrain,  50, 0.5));
+    new AutoDriveForward(drivetrain,  50, 0.5),
+    new WaitCommand(waitTime),
+    new RotatePID(drivetrain, 360));
     //new RotatePID(drivetrain, 0));
   }
 }

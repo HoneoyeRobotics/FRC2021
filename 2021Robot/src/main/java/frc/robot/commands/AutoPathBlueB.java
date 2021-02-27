@@ -41,32 +41,31 @@ public class AutoPathBlueB extends SequentialCommandGroup {
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
       //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
       new ResetOdometry(drivetrain),
-      //needs to be messed with
-      new RotatePID(drivetrain, 9.462),
+      new RotatePID(drivetrain, 9),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 170.484, 0.5),
+      new AutoDriveForward(drivetrain, 140, 0.5),
       new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       //needs to be messed with
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -55),
+      new RotatePID(drivetrain, -50),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 84.852, 0.5),
+      new AutoDriveForward(drivetrain, 85, 0.5),
       new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 90),
+      new RotatePID(drivetrain, 115),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 84.852, 0.5),
+      new AutoDriveForward(drivetrain, 85, 0.5),
       new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
       new RotatePID(drivetrain, 135),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 301.5, 0.5)));
+      new AutoDriveForward(drivetrain, 270, 0.5)));
       //reached point
   }
 }

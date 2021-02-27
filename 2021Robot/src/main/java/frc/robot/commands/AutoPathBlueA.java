@@ -29,39 +29,42 @@ public class AutoPathBlueA extends SequentialCommandGroup {
 
     addCommands(
     new SequentialCommandGroup(
-      new WaitCommand(5),
-      new GatherPowercells(powerCellSystem).withTimeout(5),
-      new WaitCommand(6),
-      new GatherPowercells(powerCellSystem).withTimeout(5),
-      new WaitCommand(8),
-      new GatherPowercells(powerCellSystem).withTimeout(5)
+      // new WaitCommand(5),
+      // new GatherPowercells(powerCellSystem)
+      // new WaitCommand(6),
+      // new GatherPowercells(powerCellSystem).withTimeout(5),
+      // new WaitCommand(8),
+      // new GatherPowercells(powerCellSystem).withTimeout(5)
     ),
 
     new SequentialCommandGroup(
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
       //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 18.435),
+      new RotatePID(drivetrain, 24),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 189.72, 0.5),
+      new AutoDriveForward(drivetrain, 174.72, 0.5),
+      new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -108.435),
+      new RotatePID(drivetrain, -100),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 94.872, 0.5),
+      new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 98.13),
+      new RotatePID(drivetrain, 132),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 67.08, 0.5),
+      new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 153.43),
+      new RotatePID(drivetrain, 163.43),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 270, 0.5)));
+      new AutoDriveForward(drivetrain, 250, 0.5)));
       //reached point
   }
 }

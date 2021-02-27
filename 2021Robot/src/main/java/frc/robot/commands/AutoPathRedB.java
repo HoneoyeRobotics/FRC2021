@@ -44,19 +44,19 @@ public class AutoPathRedB extends ParallelCommandGroup {
       new ResetOdometry(drivetrain),
       new RotatePID(drivetrain, -18.435),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 94.872, 0.5),
+      new AutoDriveForward(drivetrain, 50, 0.5),
       new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 71.565),
+      new RotatePID(drivetrain, 63.435),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 84.852, 0.5),
+      new AutoDriveForward(drivetrain, 70, 0.5),
       new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -90),
+      new RotatePID(drivetrain, -84),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 84.852, 0.5),
       new GatherPowercells(powerCellSystem).withTimeout(1),
@@ -64,9 +64,9 @@ public class AutoPathRedB extends ParallelCommandGroup {
       //reached point
       new ResetOdometry(drivetrain),
       //need to recalc angle
-      new RotatePID(drivetrain, -140),
+      new RotatePID(drivetrain, -120),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 212.136, 0.5)));
+      new AutoDriveForward(drivetrain, 190, 0.5)));
       //reached point
   }
 }

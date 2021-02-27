@@ -70,7 +70,7 @@ public final class Constants {
     public static final double wheelDiameter = 6;
 
     public static final double EncoderDistancePerPulse = (wheelDiameter * Math.PI) / 360.0;
-    public static final double kMaxSpeed = 12;
+    public static final double kMaxSpeed = 17;
     public static final double kMaxAcceleration = 3;
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
