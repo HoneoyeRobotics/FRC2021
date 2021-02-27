@@ -40,12 +40,7 @@ public class ArcadeDrivePlay extends CommandBase {
 
   @Override
   public void initialize() {
-    try {
-      m_drivetrain.loadAutoDrive();
-    } catch (ClassNotFoundException | IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+   
     tick =0;
 
     stop =  m_drivetrain.autoDriveSize();
