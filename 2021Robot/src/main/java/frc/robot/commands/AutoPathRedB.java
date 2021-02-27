@@ -28,45 +28,36 @@ public class AutoPathRedB extends ParallelCommandGroup {
     m_powerCellSystem = powerCellSystem;
 
     addCommands(
-      //new GatherPowercells(powerCellSystem),
-      // new SequentialCommandGroup(
-      //   new WaitCommand(5),
-      //   new GatherPowercells(powerCellSystem).withTimeout(2.5),
-      //   new WaitCommand(12),
-      //   new GatherPowercells(powerCellSystem).withTimeout(2.5),
-      //   new WaitCommand(8),
-      //   new GatherPowercells(powerCellSystem).withTimeout(2.5)
-      // ),
+      new SequentialCommandGroup(
+      new GatherPowercells(powerCellSystem)
+    ),
 
       new SequentialCommandGroup(
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
       //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -18.435),
+      new RotatePID(drivetrain, -18.435).withTimeout(7),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 50, 0.5),
-      new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 63.435),
+      new RotatePID(drivetrain, 73).withTimeout(7),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 70, 0.5),
-      new GatherPowercells(powerCellSystem).withTimeout(1),
+      new AutoDriveForward(drivetrain, 80, 0.5),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -84),
+      new RotatePID(drivetrain, -98).withTimeout(7),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 84.852, 0.5),
-      new GatherPowercells(powerCellSystem).withTimeout(1),
+      new AutoDriveForward(drivetrain, 90, 0.5),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
       //need to recalc angle
-      new RotatePID(drivetrain, -120),
+      new RotatePID(drivetrain, 45).withTimeout(1),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 190, 0.5)));
+      new AutoDriveForward(drivetrain, 100, 0.5)));
       //reached point
   }
 }

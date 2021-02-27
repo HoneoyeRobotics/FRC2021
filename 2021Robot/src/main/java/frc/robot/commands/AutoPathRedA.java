@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.DriveTrain;
@@ -12,7 +13,7 @@ import frc.robot.subsystems.PowercellSystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoPathRedA extends SequentialCommandGroup {
+public class AutoPathRedA extends ParallelCommandGroup {
   /** Creates a new AutoSquare. */
   
   private final DriveTrain m_drivetrain;
@@ -28,41 +29,42 @@ public class AutoPathRedA extends SequentialCommandGroup {
     m_powerCellSystem = powerCellSystem;   
     
     addCommands(
-    // new SequentialCommandGroup(
-    //   new WaitCommand(5),
-    //   new GatherPowercells(powerCellSystem).withTimeout(5),
-    //   new WaitCommand(6),
-    //   new GatherPowercells(powerCellSystem).withTimeout(5),
-    //   new WaitCommand(8),
-    //   new GatherPowercells(powerCellSystem).withTimeout(5)
-    // ),
+    new SequentialCommandGroup(
+      new GatherPowercells(powerCellSystem)
+      // new WaitCommand(5),
+      // new GatherPowercells(powerCellSystem).withTimeout(5),
+      // new WaitCommand(6),
+      // new GatherPowercells(powerCellSystem).withTimeout(5),
+      // new WaitCommand(8),
+      // new GatherPowercells(powerCellSystem).withTimeout(5)
+    ),
 
     new SequentialCommandGroup(
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
       //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
       new ResetOdometry(drivetrain),
       new AutoDriveForward(drivetrain, 70, 0.5),
-      new GatherPowercells(powerCellSystem).withTimeout(1),
+      //new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 40),
+      new RotatePID(drivetrain, 70).withTimeout(7),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 50, 0.5),
-      new GatherPowercells(powerCellSystem).withTimeout(1),
+      //new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -113),
+      new RotatePID(drivetrain, -130).withTimeout(7),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 71.592, 0.5),
-      new GatherPowercells(powerCellSystem).withTimeout(1),
+      new AutoDriveForward(drivetrain, 72, 0.5),
+      //new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -120),
+      new RotatePID(drivetrain, 50).withTimeout(1),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 189.72, 0.5)));
+      new AutoDriveForward(drivetrain, 140, 0.5)));
       //reached point
   }
 }
