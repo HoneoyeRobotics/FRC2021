@@ -70,12 +70,6 @@ public class ArcadeDriveRecord extends CommandBase {
   public void end(boolean interrupted) {
     m_drivetrain.drive(0, 0);
     m_powercellSystem.RunIntake(0);
-    try {
-      m_drivetrain.saveAutoDrive();
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
   SmartDashboard.putNumber("AutoDriveRecords", m_drivetrain.autoDriveSize());
 }
 }

@@ -114,6 +114,9 @@ public class RobotContainer {
 
     Shuffleboard.getTab("Commands").add(arcadeDriveRecord);
     Shuffleboard.getTab("Commands").add(new ArcadeDrivePlay(drivetrain, powerCellSystem));
+    Shuffleboard.getTab("Commands").add(new SaveRecording(drivetrain));
+    Shuffleboard.getTab("Commands").add(new LoadRecording(drivetrain));
+
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Commands").add(m_chooser);
 
