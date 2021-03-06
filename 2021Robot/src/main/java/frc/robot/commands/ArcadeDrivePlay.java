@@ -48,7 +48,7 @@ public class ArcadeDrivePlay extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
 @Override
 public void execute() {
-
+  System.out.println("Playing Recording");
   RecordedDrive current = m_drivetrain.getAutoDrive(tick);
   
   m_drivetrain.drive(current.xSpeed,current.zRotation );

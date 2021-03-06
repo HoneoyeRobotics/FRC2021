@@ -28,6 +28,7 @@ public class SaveRecording extends InstantCommand {
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
+      System.out.println("Recording Saved");
     }
 
   }

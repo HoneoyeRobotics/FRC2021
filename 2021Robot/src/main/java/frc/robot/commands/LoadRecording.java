@@ -27,6 +27,7 @@ public class LoadRecording extends InstantCommand {
     } catch (ClassNotFoundException | IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
+      System.out.println("Recording Loaded");
     }
 
   }

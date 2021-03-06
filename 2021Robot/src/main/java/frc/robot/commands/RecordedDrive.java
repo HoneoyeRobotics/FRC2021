@@ -2,7 +2,7 @@ package frc.robot.commands;
 
 import com.fasterxml.jackson.databind.annotation.JsonAppend.Prop;
 
-public class RecordedDrive {
+public class RecordedDrive implements java.io.Serializable   {
 
     public int tick;
     public double xSpeed;

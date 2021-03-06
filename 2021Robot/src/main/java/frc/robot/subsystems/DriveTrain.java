@@ -83,6 +83,7 @@ private final String fileName = "/home/lvuser/AutoRecord.txt";
   
       var outputStream = new ObjectOutputStream(new FileOutputStream(fileName));
       outputStream.writeObject(autoDrive);
+      outputStream.close();
   
   }
 

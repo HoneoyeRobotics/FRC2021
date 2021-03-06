@@ -47,6 +47,7 @@ public class ArcadeDriveRecord extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
+    System.out.println("Recording Path");
     double xSpeed = m_xSpeed.getAsDouble();
     double zRotation = m_zRotation.getAsDouble() * 0.75;
     boolean runWheel = m_runArmWheel.getAsBoolean();
