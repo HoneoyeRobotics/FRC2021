@@ -5,41 +5,35 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
+import java.util.function.BooleanSupplier;
+
+import edu.wpi.first.wpilibj2.command.*;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.PixyCam;
 import frc.robot.subsystems.PowercellSystem;
 
-public class FindPathA extends InstantCommand {
-  /** Creates a new FindPathA. */
-  private final PixyCam pixycam;
-  private final DriveTrain drivetrain;
-  private final PowercellSystem powercellsystem;
+public class FindPathA extends ConditionalCommand {
 
-  public FindPathA(PixyCam pixycam, DriveTrain drivetrain, PowercellSystem powercellsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.pixycam = pixycam;
-    this.drivetrain = drivetrain;
-    this.powercellsystem = powercellsystem;
+  public FindPathA(Command trueCommand, Command falseCommand, BooleanSupplier booleanSupplier) {
+    super(trueCommand, falseCommand, booleanSupplier);
+    //addRequirements(pixycam, drivetrain, powercellsystem);
 
-    addRequirements(pixycam, drivetrain, powercellsystem);
   }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    String path = pixycam.GetPath();
-    if (path == "blue") {
-      AutoPathBlueA currentPath = new AutoPathBlueA(drivetrain, powercellsystem, 0.25, 1.5 );
-      //CommandScheduler.getInstance().schedule(currentPath);
-      currentPath.schedule();
-    } else {
-      if (path == "red") {
-        AutoPathRedA currentPath = new AutoPathRedA(drivetrain, powercellsystem, 0.25, 1.5);
-        //CommandScheduler.getInstance().schedule(currentPath);
-        currentPath.schedule();
-      }
-    }
-  }
+  // @Override
+  // public void initialize() {
+  //   String path = pixycam.GetPath();
+  //   if (path == "blue") {
+  //     AutoPathBlueA currentPath = ;
+  //     currentPath.schedule();
+  //   } else {
+  //     if (path == "red") {
+  //       ;
+  //       currentPath.schedule();
+  //     }
+  //   }
+  // }
 }
