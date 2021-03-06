@@ -28,9 +28,6 @@ import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-  private Pixy2 pixycam;
-  boolean isCamera = false;
-  int state = -1;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -39,7 +36,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
-    pixycam = Pixy2.createInstance(Pixy2.LinkType.SPI);
   }
 
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
@@ -111,27 +107,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    if (!isCamera) {
-      state = pixycam.init( 1 ); // if no camera present, try to initialize
-    }
-    
-    isCamera = state>= 0 ;
-    SmartDashboard.putBoolean( "Camera" , isCamera); 
-    pixycam.getCCC().getBlocks( false , 255 , 255 ); 
-    ArrayList<Block> blocks = pixycam.getCCC().getBlockCache();
-
-    if (blocks.size() > 0 ) {
-      double xcoord = blocks.get( 0 ).getX();
-      double ycoord = blocks.get( 0 ).getY(); 
-      String data = blocks.get( 0 ).toString();
-      SmartDashboard.putBoolean( "present" , true );
-      SmartDashboard.putNumber( "Xccord" ,xcoord);
-      SmartDashboard.putNumber( "Ycoord" , ycoord);
-      SmartDashboard.putString( "Data" , data );
-    } else {
-      SmartDashboard.putBoolean( "present" , false );
-      SmartDashboard.putNumber( "size" , blocks.size());
-    }
   }
 
   @Override

@@ -16,20 +16,16 @@ import frc.robot.subsystems.PowercellSystem;
 public class AutoPathRedA extends ParallelCommandGroup {
   /** Creates a new AutoSquare. */
   
-  private final DriveTrain m_drivetrain;
-  private final PowercellSystem m_powerCellSystem;
   
-  public AutoPathRedA(DriveTrain drivetrain, PowercellSystem powerCellSystem) {
-    double waitTime = 0.25;
-    double rotateTimeout = 1.5;
+  public AutoPathRedA(DriveTrain drivetrain, PowercellSystem powerCellSystem,
+    double waitTime,
+    double rotateTimeout){
     //double rotateAngle = 90;
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    m_drivetrain = drivetrain;   
-    m_powerCellSystem = powerCellSystem;   
-    
-    addCommands(
+    super(
     new SequentialCommandGroup(
+      new LowerConveyer(powerCellSystem),
       new GatherPowercells(powerCellSystem)
       // new WaitCommand(5),
       // new GatherPowercells(powerCellSystem).withTimeout(5),
@@ -43,6 +39,7 @@ public class AutoPathRedA extends ParallelCommandGroup {
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
       //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
       new ResetOdometry(drivetrain),
+      new WaitCommand(waitTime),
       new AutoDriveForward(drivetrain, 70, 0.5),
       //new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),

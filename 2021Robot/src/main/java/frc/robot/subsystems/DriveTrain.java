@@ -94,8 +94,6 @@ private final String fileName = "/home/lvuser/AutoRecord.txt";
 
   }
   public DriveTrain() {
-
-
     leftFrontMotor = new WPI_VictorSPX(Constants.CANID_FrontLeftDriveMotor);
     leftFrontMotor.setNeutralMode(NeutralMode.Brake);
     leftRearMotor = new WPI_VictorSPX(Constants.CANID_RearLeftDriveMotor);

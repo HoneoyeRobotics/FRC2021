@@ -16,20 +16,10 @@ import frc.robot.subsystems.PowercellSystem;
 public class AutoPathBlueA extends ParallelCommandGroup {
   /** Creates a new AutoSquare. */
   
-  private final DriveTrain m_drivetrain;
-  private final PowercellSystem m_powerCellSystem;
-
-  public AutoPathBlueA(DriveTrain drivetrain, PowercellSystem powerCellSystem) {
-    double waitTime = 0.25;
-    double rotateTimeout = 1.5;
-    //double rotateAngle = 90;
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    m_drivetrain = drivetrain;
-    m_powerCellSystem = powerCellSystem;
-
-    addCommands(
+  public AutoPathBlueA(DriveTrain drivetrain, PowercellSystem powerCellSystem, double waitTime, double rotateTimeout) {
+    super(
     new SequentialCommandGroup(
+      new LowerConveyer(powerCellSystem),
       new GatherPowercells(powerCellSystem)
     ),
 

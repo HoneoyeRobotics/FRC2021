@@ -30,6 +30,7 @@ public class AutoPathBlueB extends ParallelCommandGroup {
 
     addCommands(
       new SequentialCommandGroup(
+        new LowerConveyer(powerCellSystem),
         new GatherPowercells(powerCellSystem)
       ),
 

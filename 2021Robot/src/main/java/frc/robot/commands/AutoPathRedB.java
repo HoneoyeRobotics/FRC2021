@@ -29,8 +29,9 @@ public class AutoPathRedB extends ParallelCommandGroup {
 
     addCommands(
       new SequentialCommandGroup(
-      new GatherPowercells(powerCellSystem)
-    ),
+        new LowerConveyer(powerCellSystem),
+        new GatherPowercells(powerCellSystem)
+      ),
 
       new SequentialCommandGroup(
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 

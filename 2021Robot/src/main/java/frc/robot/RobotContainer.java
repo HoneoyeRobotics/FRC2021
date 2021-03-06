@@ -60,6 +60,7 @@ public class RobotContainer {
   private final Climber climber;
   private final Camera camera;
   private final PowercellSystem powerCellSystem;
+  private final PixyCam pixycam;
   private final Joystick driverJoystick = new Joystick(0);
   private final Joystick coDriverjoystick = new Joystick(1);
   private SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -71,6 +72,8 @@ public class RobotContainer {
     drivetrain = new DriveTrain();
     climber = new Climber();
     powerCellSystem = new PowercellSystem();
+    pixycam = new PixyCam();
+
     // default commands
     ArcadeDrive arcadeDrive = new ArcadeDrive(() -> driverJoystick.getRawAxis(1) * (drivetrain.isReversed() ? 1 : -1),
         () -> driverJoystick.getRawAxis(3) - driverJoystick.getRawAxis(2), drivetrain);
@@ -93,25 +96,31 @@ public class RobotContainer {
     Shuffleboard.getTab("Commands").add(new DeployArm(powerCellSystem));
     Shuffleboard.getTab("Commands").add("ADF", new AutoDriveForward(drivetrain, -36, -0.75).withTimeout(6));
 
-    // setup autonomous commands
+    // 2021 auto galactic search modes
+    m_chooser.addOption("Find Path A", new FindPathA(pixycam, drivetrain, powerCellSystem));
+    m_chooser.addOption("Find Path B", new FindPathB(pixycam, drivetrain, powerCellSystem));
+    m_chooser.addOption("Path Red A", new AutoPathRedA(drivetrain, powerCellSystem, 0.25, 1.5));
+    m_chooser.addOption("Path Red B", new AutoPathRedB(drivetrain, powerCellSystem));
+    m_chooser.addOption("Path Blue A", new AutoPathBlueA(drivetrain, powerCellSystem, 0.25, 1.5));
+    m_chooser.addOption("Path Blue B", new AutoPathBlueB(drivetrain, powerCellSystem));
+
+    // 2020 start auto modes
     m_chooser.setDefaultOption("Score in Front", new AutoScoreInFront(drivetrain, powerCellSystem));
     m_chooser.addOption("Score from Left", new AutoScoreFromLeftSide(drivetrain, powerCellSystem));
     m_chooser.addOption("Score from Right", new AutoScoreFromRightSide(drivetrain, powerCellSystem));
     m_chooser.addOption("Drive past Base line", new AutoDrivePastBaseLine(drivetrain));
+    
+    // testing auto modes
+    m_chooser.addOption("Auto Forward Test Distance", new AutoForwardDistanceTest(drivetrain));
     m_chooser.addOption("Auto Pathfinder", new AutoPathFinder(drivetrain, "MoveForward"));
     m_chooser.addOption("Turn 90",  new RotatePID(drivetrain, 90));
     m_chooser.addOption("Turn 0", new RotatePID(drivetrain, 0));
     m_chooser.addOption("Turn 180", new RotatePID(drivetrain, 180));
     m_chooser.addOption("SQUAREZZZ", new AutoSquare(drivetrain));
-    m_chooser.addOption("Path Red A", new AutoPathRedA(drivetrain, powerCellSystem));
-    m_chooser.addOption("Path Red B", new AutoPathRedB(drivetrain, powerCellSystem));
-    m_chooser.addOption("Path Blue A", new AutoPathBlueA(drivetrain, powerCellSystem));
-    m_chooser.addOption("Path Blue B", new AutoPathBlueB(drivetrain, powerCellSystem));
-    m_chooser.addOption("Auto Forward Test Distance", new AutoForwardDistanceTest(drivetrain));
 
     var arcadeDriveRecord = new ArcadeDriveRecord(() -> driverJoystick.getRawAxis(1) * (drivetrain.isReversed() ? 1 : -1),
     () -> driverJoystick.getRawAxis(3) - driverJoystick.getRawAxis(2), drivetrain, powerCellSystem, () -> driverJoystick.getRawButton(4) /* y*/);
-
+SmartDashboard.putData(drivetrain);
     Shuffleboard.getTab("Commands").add(arcadeDriveRecord);
     Shuffleboard.getTab("Commands").add(new ArcadeDrivePlay(drivetrain, powerCellSystem));
     Shuffleboard.getTab("Commands").add(new SaveRecording(drivetrain));
