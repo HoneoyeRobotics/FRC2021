@@ -23,22 +23,16 @@ public class AutoPathRedA extends ParallelCommandGroup {
     //double rotateAngle = 90;
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    super(
+    addCommands(
     new SequentialCommandGroup(
       new LowerConveyer(powerCellSystem),
       new GatherPowercells(powerCellSystem)
-      // new WaitCommand(5),
-      // new GatherPowercells(powerCellSystem).withTimeout(5),
-      // new WaitCommand(6),
-      // new GatherPowercells(powerCellSystem).withTimeout(5),
-      // new WaitCommand(8),
-      // new GatherPowercells(powerCellSystem).withTimeout(5)
     ),
 
     new SequentialCommandGroup(
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
       //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
-      new LowerConveyer(powerCellSystem),
+      //new LowerConveyer(powerCellSystem),
       new ResetOdometry(drivetrain),
       new WaitCommand(waitTime),
       new AutoDriveForward(drivetrain, 70, 0.5),

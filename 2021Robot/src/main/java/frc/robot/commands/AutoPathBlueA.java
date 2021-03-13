@@ -17,7 +17,7 @@ public class AutoPathBlueA extends ParallelCommandGroup {
   /** Creates a new AutoSquare. */
   
   public AutoPathBlueA(DriveTrain drivetrain, PowercellSystem powerCellSystem, double waitTime, double rotateTimeout) {
-    super(
+    addCommands(
     new SequentialCommandGroup(
       new LowerConveyer(powerCellSystem),
       new GatherPowercells(powerCellSystem)
