@@ -38,6 +38,7 @@ public class AutoPathRedA extends ParallelCommandGroup {
     new SequentialCommandGroup(
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
       //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
+      new LowerConveyer(powerCellSystem),
       new ResetOdometry(drivetrain),
       new WaitCommand(waitTime),
       new AutoDriveForward(drivetrain, 70, 0.5),
@@ -45,23 +46,23 @@ public class AutoPathRedA extends ParallelCommandGroup {
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 70).withTimeout(7),
+      new RotatePID(drivetrain, 74).withTimeout(7),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 50, 0.5),
+      new AutoDriveForward(drivetrain, 65, 0.5),
       //new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -130).withTimeout(7),
+      new RotatePID(drivetrain, -140).withTimeout(7),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 72, 0.5),
+      new AutoDriveForward(drivetrain, 100, 0.5),
       //new GatherPowercells(powerCellSystem).withTimeout(1),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
       new RotatePID(drivetrain, 50).withTimeout(1),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 140, 0.5)));
+      new AutoDriveForward(drivetrain, 210, 0.5)));
       //reached point
   }
 }

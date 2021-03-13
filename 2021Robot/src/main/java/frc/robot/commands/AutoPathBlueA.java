@@ -26,6 +26,7 @@ public class AutoPathBlueA extends ParallelCommandGroup {
     new SequentialCommandGroup(
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
       //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
+      new LowerConveyer(powerCellSystem),
       new ResetOdometry(drivetrain),
       new RotatePID(drivetrain, 40).withTimeout(7),
       new WaitCommand(waitTime), 

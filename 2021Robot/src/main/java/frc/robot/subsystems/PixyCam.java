@@ -27,38 +27,62 @@ public class PixyCam extends SubsystemBase {
   public String GetPath() {
     String path = "";
 
-    if (present == false) {
-      path = "blue";
-      return path;
-    } else {
-      path = "red";
-      return path;
+    for (int count = 0; count < 300; count++) {
+      if (!isCamera) {
+        state = pixycam.init(1); // if no camera present, try to initialize
+      }
+      
+      isCamera = state >= 0 ;
+      SmartDashboard.putBoolean("Camera" , isCamera); 
+      pixycam.getCCC().getBlocks(false , 255 , 255 ); 
+      ArrayList<Block> blocks = pixycam.getCCC().getBlockCache();
+  
+      if (blocks.size() > 0 ) {
+        double xcoord = blocks.get(0).getX();
+        double ycoord = blocks.get(0).getY(); 
+        String data = blocks.get(0).toString();
+        SmartDashboard.putBoolean("present", true );
+        SmartDashboard.putNumber("Xccord", xcoord);
+        SmartDashboard.putNumber("Ycoord", ycoord);
+        SmartDashboard.putString("Data", data );
+        present = true;
+      } else {
+        SmartDashboard.putBoolean("present", false );
+        present = false;
+        SmartDashboard.putNumber("size", blocks.size());
+      }
+      if (present == false) {
+        path = "blue";
+      } else {
+        return "red";
+      } 
     }
+    return path;
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-    if (!isCamera) {
-      state = pixycam.init(1); // if no camera present, try to initialize
-    }
+//  @Override
+//   public void periodic() {
+//     // This method will be called once per scheduler run
+//     if (!isCamera) {
+//       state = pixycam.init(1); // if no camera present, try to initialize
+//     }
     
-    isCamera = state >= 0 ;
-    SmartDashboard.putBoolean("Camera" , isCamera); 
-    pixycam.getCCC().getBlocks(false , 255 , 255 ); 
-    ArrayList<Block> blocks = pixycam.getCCC().getBlockCache();
+//     isCamera = state >= 0 ;
+//     SmartDashboard.putBoolean("Camera" , isCamera); 
+//     pixycam.getCCC().getBlocks(false , 255 , 255 ); 
+//     ArrayList<Block> blocks = pixycam.getCCC().getBlockCache();
 
-    if (blocks.size() > 0 ) {
-      double xcoord = blocks.get(0).getX();
-      double ycoord = blocks.get(0).getY(); 
-      String data = blocks.get(0).toString();
-      SmartDashboard.putBoolean("present", true );
-      SmartDashboard.putNumber("Xccord", xcoord);
-      SmartDashboard.putNumber("Ycoord", ycoord);
-      SmartDashboard.putString("Data", data );
-    } else {
-      SmartDashboard.putBoolean("present", false );
-      SmartDashboard.putNumber("size", blocks.size());
-    }
+//     if (blocks.size() > 0 ) {
+//       double xcoord = blocks.get(0).getX();
+//       double ycoord = blocks.get(0).getY(); 
+//       String data = blocks.get(0).toString();
+//       SmartDashboard.putBoolean("present", true );
+//       SmartDashboard.putNumber("Xccord", xcoord);
+//       SmartDashboard.putNumber("Ycoord", ycoord);
+//       SmartDashboard.putString("Data", data );
+//     } else {
+//       SmartDashboard.putBoolean("present", false );
+//       SmartDashboard.putNumber("size", blocks.size());
+//     }
+//   }
   }
-}

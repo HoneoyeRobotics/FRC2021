@@ -63,6 +63,7 @@ public class AutoDriveForward extends CommandBase {
     this.speed = speed;
     this.stephenSpeed = speed * 1.5;
   }
+  
   private final double speed;
   private final double stephenSpeed;
   private double distance = 0;

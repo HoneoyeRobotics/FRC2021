@@ -97,9 +97,11 @@ public class RobotContainer {
     Shuffleboard.getTab("Commands").add("ADF", new AutoDriveForward(drivetrain, -36, -0.75).withTimeout(6));
 
     // 2021 auto galactic search modes
-    m_chooser.addOption("Find Path A", new FindPathA(new AutoPathRedA(drivetrain, powerCellSystem, 0.25, 1.5), new AutoPathBlueA(drivetrain, powerCellSystem, 0.25, 1.5), () -> {
-                return pixycam.GetPath() == "red";
-              }
+    m_chooser.addOption("Find Path A", new FindPathA(new AutoPathRedA(drivetrain, powerCellSystem, 0.25, 1.5), 
+    new AutoPathBlueA(drivetrain, powerCellSystem, 0.25, 1.5), 
+    () -> { 
+      return pixycam.GetPath() == "red";
+    }
     ));
     m_chooser.addOption("Find Path B", new FindPathB(pixycam, drivetrain, powerCellSystem));
     m_chooser.addOption("Path Red A", new AutoPathRedA(drivetrain, powerCellSystem, 0.25, 1.5));
