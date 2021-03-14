@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 
 // import java.io.IOException;
 // import java.nio.file.Path;
@@ -103,7 +104,16 @@ public class RobotContainer {
       return pixycam.GetPath() == "red";
     }
     ));
-    m_chooser.addOption("Find Path B", new FindPathB(pixycam, drivetrain, powerCellSystem));
+
+    
+    m_chooser.addOption("Find Path B", new ConditionalCommand(new AutoPathRedB(drivetrain, powerCellSystem), 
+    new AutoPathBlueB(drivetrain, powerCellSystem), 
+    () -> { 
+      return pixycam.GetPath() == "red";
+    }
+    ));
+
+    // m_chooser.addOption("Find Path B", new FindPathB(pixycam, drivetrain, powerCellSystem));
     m_chooser.addOption("Path Red A", new AutoPathRedA(drivetrain, powerCellSystem, 0.25, 1.5));
     m_chooser.addOption("Path Red B", new AutoPathRedB(drivetrain, powerCellSystem));
     m_chooser.addOption("Path Blue A", new AutoPathBlueA(drivetrain, powerCellSystem, 0.25, 1.5));
