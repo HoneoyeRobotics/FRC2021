@@ -36,21 +36,21 @@ public class AutoPathRedB extends ParallelCommandGroup {
       new SequentialCommandGroup(
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
       //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
-      new LowerConveyer(powerCellSystem),
+      //new LowerConveyer(powerCellSystem),
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -18.435).withTimeout(7),
+      new RotatePID(drivetrain, -18.435).withTimeout(4),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 50, 0.5),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 73).withTimeout(7),
+      new RotatePID(drivetrain, 73).withTimeout(4),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 80, 0.5),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -98).withTimeout(7),
+      new RotatePID(drivetrain, -98).withTimeout(4),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 90, 0.5),
       new WaitCommand(waitTime),

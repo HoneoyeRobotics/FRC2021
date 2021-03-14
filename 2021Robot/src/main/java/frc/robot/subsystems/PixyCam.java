@@ -30,6 +30,8 @@ public class PixyCam extends SubsystemBase {
     for (int count = 0; count < 300; count++) {
       if (!isCamera) {
         state = pixycam.init(1); // if no camera present, try to initialize
+        pixycam.setLamp((byte)1, (byte)1);
+        pixycam.setLED(255, 255, 255);
       }
       
       isCamera = state >= 0 ;

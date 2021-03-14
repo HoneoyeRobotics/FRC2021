@@ -17,6 +17,7 @@ public class AutoPathBlueA extends ParallelCommandGroup {
   /** Creates a new AutoSquare. */
   
   public AutoPathBlueA(DriveTrain drivetrain, PowercellSystem powerCellSystem, double waitTime, double rotateTimeout) {
+    
     addCommands(
     new SequentialCommandGroup(
       new LowerConveyer(powerCellSystem),
@@ -26,32 +27,29 @@ public class AutoPathBlueA extends ParallelCommandGroup {
     new SequentialCommandGroup(
       //new AutoDriveForward(drivetrain, distance, speed), will write distance in feet for now 
       //new RotatePID(drivetrain, angle), pos angle = right turn, neg angle = left turn
-      new LowerConveyer(powerCellSystem),
+      //new LowerConveyer(powerCellSystem),
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 40).withTimeout(7),
+      new RotatePID(drivetrain, 40).withTimeout(4),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 150, 0.5),
-      //new GatherPowercells(powerCellSystem).withTimeout(1),
+      new AutoDriveForward(drivetrain, 126, 0.5),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -95).withTimeout(7),
+      new RotatePID(drivetrain, -115).withTimeout(4),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 97, 0.5),
-      //new GatherPowercells(powerCellSystem).withTimeout(1),
+      new AutoDriveForward(drivetrain, 140, 0.5),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 92).withTimeout(7),
+      new RotatePID(drivetrain, 115).withTimeout(4),
       new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 67.08, 0.5),
-      //new GatherPowercells(powerCellSystem).withTimeout(1),
-      new WaitCommand(waitTime),
+      new AutoDriveForward(drivetrain, 100, 0.5),
+      new WaitCommand(waitTime)));
       //reached point
-      new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -30).withTimeout(1),
-      new WaitCommand(waitTime), 
-      new AutoDriveForward(drivetrain, 20, 0.5)));
+      // new ResetOdometry(drivetrain),
+      // new RotatePID(drivetrain, -30).withTimeout(1),
+      // new WaitCommand(waitTime), 
+      // new AutoDriveForward(drivetrain, 20, 0.5)));
       //reached point
   }
 }

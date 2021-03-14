@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,6 +21,7 @@ import frc.robot.Constants;
 public class PowercellSystem extends SubsystemBase {
   //private final Compressor compressor;
   private final DoubleSolenoid conveyorSolenoid;
+  private final Solenoid light;
   //private final DoubleSolenoid rearHatchSolenoid;
   // private final VictorSfinal final PX m_ConveyerMotor;
   private final WPI_VictorSPX conveyerMotor = new WPI_VictorSPX(Constants.CANID_ConveyerMotor);
@@ -32,9 +34,11 @@ public class PowercellSystem extends SubsystemBase {
     //initializes compressor here
     conveyorSolenoid = new DoubleSolenoid (Constants.CANID_PCM, Constants.PCMID_ConveyerSoleniodForward, Constants.PCMID_ConveyerSoleniodBackward);
     Compressor compressor = new Compressor(Constants.CANID_PCM);
+    light = new Solenoid (Constants.CANID_PCM, 7);
     pressureReader = new AnalogInput(0);
     compressor.setClosedLoopControl(true);
-    
+
+    light.set(true);
   }
 
   public boolean getArmUp(){
