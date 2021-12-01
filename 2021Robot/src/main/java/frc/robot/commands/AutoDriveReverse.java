@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
  * An example command that uses an example subsystem.
  */
-public class AutoDriveForward extends CommandBase {
+public class AutoDriveReverse extends CommandBase {
   private final DriveTrain m_drivetrain;
 
   //start of test 
@@ -56,7 +56,7 @@ public class AutoDriveForward extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AutoDriveForward(DriveTrain drivetrain, double distance, double speed) {
+  public AutoDriveReverse(DriveTrain drivetrain, double distance, double speed) {
     m_drivetrain = drivetrain;
     addRequirements(m_drivetrain);
     this.distance = distance;
@@ -73,7 +73,7 @@ public class AutoDriveForward extends CommandBase {
   @Override
   public void initialize() {
     startEncoder = m_drivetrain.leftEncoderDistance();
-    endEncoder = startEncoder + distance;
+    endEncoder = startEncoder - distance;
     kAngleSetpoint = m_drivetrain.getAngle();
   }
 
@@ -88,14 +88,16 @@ public class AutoDriveForward extends CommandBase {
     // if(speed <= 0) {
 
     // }
-    turningValue = Math.copySign(turningValue, stephenSpeed);
-    m_drivetrain.drive(stephenSpeed, turningValue);
+    
+    double driveSpeed = stephenSpeed * -1;
+    turningValue = Math.copySign(turningValue, driveSpeed);
+    m_drivetrain.drive(driveSpeed, turningValue);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return m_drivetrain.leftEncoderDistance() > endEncoder;
+    return m_drivetrain.leftEncoderDistance() < endEncoder;
   }
 
   @Override

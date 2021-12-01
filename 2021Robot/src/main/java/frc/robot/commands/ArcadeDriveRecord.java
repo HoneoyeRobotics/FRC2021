@@ -24,14 +24,15 @@ public class ArcadeDriveRecord extends CommandBase {
   private final DoubleSupplier m_zRotation;
   private final PowercellSystem m_powercellSystem;
   private final BooleanSupplier m_runArmWheel;
-
+private final BooleanSupplier m_constantSpeed;
   public ArcadeDriveRecord(DoubleSupplier xSpeed, DoubleSupplier zRotation, DriveTrain drivetrain,
-      PowercellSystem powercellSystem, BooleanSupplier runArmWheel) {
+      PowercellSystem powercellSystem, BooleanSupplier runArmWheel, BooleanSupplier constantSpeed) {
     m_drivetrain = drivetrain;
     m_xSpeed = xSpeed;
     m_zRotation = zRotation;
     m_powercellSystem = powercellSystem;
     m_runArmWheel = runArmWheel;
+    m_constantSpeed = constantSpeed;
     addRequirements(m_drivetrain);
     addRequirements(powercellSystem);
   }
@@ -49,6 +50,8 @@ public class ArcadeDriveRecord extends CommandBase {
   public void execute() {
     System.out.println("Recording Path");
     double xSpeed = m_xSpeed.getAsDouble();
+    if(m_constantSpeed.getAsBoolean() == true)
+      xSpeed = 0.70;
     double zRotation = m_zRotation.getAsDouble() * 0.75;
     boolean runWheel = m_runArmWheel.getAsBoolean();
     m_drivetrain.drive(xSpeed, zRotation);

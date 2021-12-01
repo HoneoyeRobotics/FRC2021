@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -61,7 +62,7 @@ public class RobotContainer {
   private final Climber climber;
   private final Camera camera;
   private final PowercellSystem powerCellSystem;
-  private final PixyCam pixycam;
+  // private final PixyCam pixycam;
   private final Joystick driverJoystick = new Joystick(0);
   private final Joystick coDriverjoystick = new Joystick(1);
   private SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -73,7 +74,7 @@ public class RobotContainer {
     drivetrain = new DriveTrain();
     climber = new Climber();
     powerCellSystem = new PowercellSystem();
-    pixycam = new PixyCam();
+    //pixycam = new PixyCam();
 
     // default commands
     ArcadeDrive arcadeDrive = new ArcadeDrive(() -> driverJoystick.getRawAxis(1) * (drivetrain.isReversed() ? 1 : -1),
@@ -98,26 +99,27 @@ public class RobotContainer {
     Shuffleboard.getTab("Commands").add("ADF", new AutoDriveForward(drivetrain, -36, -0.75).withTimeout(6));
 
     // 2021 auto galactic search modes
-    m_chooser.addOption("Find Path A", new FindPathA(new AutoPathRedA(drivetrain, powerCellSystem, 0.25, 1.5), 
-    new AutoPathBlueA(drivetrain, powerCellSystem, 0.25, 1.5), 
-    () -> { 
-      return pixycam.GetPath() == "red";
-    }
-    ));
+    // m_chooser.addOption("Find Path A", new FindPathA(new AutoPathRedA(drivetrain, powerCellSystem, 0.25, 1.5), 
+    // new AutoPathBlueA(drivetrain, powerCellSystem, 0.25, 1.5), 
+    // () -> { 
+    //   return pixycam.GetPath() == "red";
+    // }
+    // ));
 
     
-    m_chooser.addOption("Find Path B", new ConditionalCommand(new AutoPathRedB(drivetrain, powerCellSystem), 
-    new AutoPathBlueB(drivetrain, powerCellSystem), 
-    () -> { 
-      return pixycam.GetPath() == "red";
-    }
-    ));
+    // m_chooser.addOption("Find Path B", new ConditionalCommand(new AutoPathRedB(drivetrain, powerCellSystem), 
+    // new AutoPathBlueB(drivetrain, powerCellSystem), 
+    // () -> { 
+    //   return pixycam.GetPath() == "red";
+    // }
+    // ));
 
     // m_chooser.addOption("Find Path B", new FindPathB(pixycam, drivetrain, powerCellSystem));
-    m_chooser.addOption("Path Red A", new AutoPathRedA(drivetrain, powerCellSystem, 0.25, 1.5));
-    m_chooser.addOption("Path Red B", new AutoPathRedB(drivetrain, powerCellSystem));
-    m_chooser.addOption("Path Blue A", new AutoPathBlueA(drivetrain, powerCellSystem, 0.25, 1.5));
-    m_chooser.addOption("Path Blue B", new AutoPathBlueB(drivetrain, powerCellSystem));
+    //m_chooser.addOption("Path Red A", new AutoPathRedA(drivetrain, powerCellSystem, 0.25, 1.5));
+    //m_chooser.addOption("Path Red B", new AutoPathRedB(drivetrain, powerCellSystem));
+    //m_chooser.addOption("Path Blue A", new AutoPathBlueA(drivetrain, powerCellSystem, 0.25, 1.5));
+    //m_chooser.addOption("Path Blue B", new AutoPathBlueB(drivetrain, powerCellSystem));
+    //m_chooser.addOption("Auto Bounce Pad", new AutoBouncePad(drivetrain, powerCellSystem, 0.25, 1.5));
 
     // 2020 start auto modes
     m_chooser.setDefaultOption("Score in Front", new AutoScoreInFront(drivetrain, powerCellSystem));
@@ -126,24 +128,26 @@ public class RobotContainer {
     m_chooser.addOption("Drive past Base line", new AutoDrivePastBaseLine(drivetrain));
     
     // testing auto modes
-    m_chooser.addOption("Auto Forward Test Distance", new AutoForwardDistanceTest(drivetrain));
-    m_chooser.addOption("Auto Pathfinder", new AutoPathFinder(drivetrain, "MoveForward"));
-    m_chooser.addOption("Turn 90",  new RotatePID(drivetrain, 90));
-    m_chooser.addOption("Turn 0", new RotatePID(drivetrain, 0));
-    m_chooser.addOption("Turn 180", new RotatePID(drivetrain, 180));
-    m_chooser.addOption("SQUAREZZZ", new AutoSquare(drivetrain));
+    //m_chooser.addOption("Auto Forward Test Distance", new AutoForwardDistanceTest(drivetrain));
+    //m_chooser.addOption("Auto Pathfinder", new AutoPathFinder(drivetrain, "MoveForward"));
+    //m_chooser.addOption("Turn 90",  new RotatePID(drivetrain, 90));
+    //m_chooser.addOption("Turn 0", new RotatePID(drivetrain, 0));
+    //m_chooser.addOption("Turn 180", new RotatePID(drivetrain, 180));
+    //m_chooser.addOption("SQUAREZZZ", new AutoSquare(drivetrain));
 
     var arcadeDriveRecord = new ArcadeDriveRecord(() -> driverJoystick.getRawAxis(1) * (drivetrain.isReversed() ? 1 : -1),
-    () -> driverJoystick.getRawAxis(3) - driverJoystick.getRawAxis(2), drivetrain, powerCellSystem, () -> driverJoystick.getRawButton(4) /* y*/);
+    () -> driverJoystick.getRawAxis(3) - driverJoystick.getRawAxis(2), drivetrain, powerCellSystem, 
+    () -> driverJoystick.getRawButton(4),
+    () -> driverJoystick.getRawButton(1) /* y*/);
 SmartDashboard.putData(drivetrain);
     Shuffleboard.getTab("Commands").add(arcadeDriveRecord);
     Shuffleboard.getTab("Commands").add(new ArcadeDrivePlay(drivetrain, powerCellSystem));
     Shuffleboard.getTab("Commands").add(new SaveRecording(drivetrain));
     Shuffleboard.getTab("Commands").add(new LoadRecording(drivetrain));
-
+    //Shuffleboard.getTab("title").add(new dashboardName(drivetrain));
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Commands").add(m_chooser);
-
+SmartDashboard.putData(m_chooser);
     }
 
   /**
@@ -154,30 +158,40 @@ SmartDashboard.putData(drivetrain);
    */
   private void configureCoDriverButtonBindings() {
     // buttons for codriver joystick
-    final JoystickButton leftBumper = new JoystickButton(coDriverjoystick, 5);
-    final JoystickButton rightBumper = new JoystickButton(coDriverjoystick, 6);
     final JoystickButton backButton = new JoystickButton(coDriverjoystick, 7);
     final JoystickButton startButton = new JoystickButton(coDriverjoystick, 8);
     final JoystickButton yButton = new JoystickButton(coDriverjoystick, 4);
 
-    // Connect the buttons to commands
+    final JoystickButton leftBumper = new JoystickButton(coDriverjoystick, 5);
+    final JoystickButton rightBumper = new JoystickButton(coDriverjoystick, 6);
+
+    // co-driver commands
+
+    backButton.whileHeld(new RetractClimber(climber));
+    startButton.whileHeld(new ElevateClimber(climber));
+    yButton.whileHeld(new SpitPowercells(powerCellSystem));
+    
     leftBumper.whileHeld(new GatherPowercells(powerCellSystem));
     rightBumper.whileHeld(new DepositPowercells(powerCellSystem));
-    startButton.whileHeld(new ElevateClimber(climber));
-    backButton.whileHeld(new RetractClimber(climber));
-    yButton.whileHeld(new SpitPowercells(powerCellSystem));
   }
 
   private void configureDriverButtonBindings() {
-    // bubttons being used on controller
+    // buttons being used on driver controller
     final JoystickButton aButton = new JoystickButton(driverJoystick, 1);
     final JoystickButton bButton = new JoystickButton(driverJoystick, 2);
     final JoystickButton xButton = new JoystickButton(driverJoystick, 3);
-    xButton.whenPressed(new SwitchDriveAndCamera(drivetrain, camera));
+    
+    //final JoystickButton leftBumper = new JoystickButton(driverJoystick, 5);
+    //final JoystickButton rightBumper = new JoystickButton(driverJoystick, 6);
 
-    // buttons assigned to commands
+    // driver commands
+
     aButton.whileHeld(new EngageExtraLift(climber));
     bButton.whileHeld(new DisengageExtraLift(climber));
+    xButton.whenPressed(new SwitchDriveAndCamera(drivetrain, camera));
+
+    //leftBumper.whileHeld(new GatherPowercells(powerCellSystem));
+    //rightBumper.whileHeld(new DepositPowercells(powerCellSystem));
   }
 
   public void teleopInit() {

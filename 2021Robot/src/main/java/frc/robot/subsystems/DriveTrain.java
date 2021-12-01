@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -73,23 +74,38 @@ public class DriveTrain extends SubsystemBase {
   public RecordedDrive getAutoDrive(int item) {
     return autoDrive.get(item);
   }
-private final String fileName = "/home/lvuser/AutoRecord.txt";
-  public void saveAutoDrive() throws FileNotFoundException, IOException {
-    
-    var f = new File(fileName);
-    if(!f.exists()){
-      f.createNewFile();
-    }
-  
-      var outputStream = new ObjectOutputStream(new FileOutputStream(fileName));
-      outputStream.writeObject(autoDrive);
-      outputStream.close();
-  
+
+  private final String filePath = "/home/lvuser/";
+
+  private String getFileName() {
+    // String dashboardName =
+    //String dashboardName = SmartDashboard.getString("Filename", "AutoRecord");
+
+    //return filePath + fileNameEntry.getString("") + ".txt";
+    System.out.println("The name of the file the program is looking for is " + fileNameEntry);
+    return filePath + fileNameEntry + ".txt";
+
   }
 
+  public void saveAutoDrive() throws FileNotFoundException, IOException {
+    String saveRecordingName = "";
+    var f = new File(getFileName());
+    if (!f.exists()) {
+      f.createNewFile(); 
+    }
+
+    var outputStream = new ObjectOutputStream(new FileOutputStream(getFileName()));
+    outputStream.writeObject(autoDrive);
+    outputStream.close();
+
+  }
+
+  private ShuffleboardTab commandTab = Shuffleboard.getTab("Commands");
+  private NetworkTableEntry fileNameEntry = commandTab.add("File Name", "AutoPath").getEntry();
+  //String fileNameEntryString = fileNameEntry;
   public void loadAutoDrive() throws FileNotFoundException, IOException, ClassNotFoundException {
 
-    var inputStream = new ObjectInputStream(new FileInputStream(fileName));
+    var inputStream = new ObjectInputStream(new FileInputStream(getFileName()));
     autoDrive = (ArrayList<RecordedDrive>)(inputStream.readObject());
 
   }
@@ -103,7 +119,6 @@ private final String fileName = "/home/lvuser/AutoRecord.txt";
     rightFrontMotor.setNeutralMode(NeutralMode.Brake);
     rightRearMotor = new WPI_VictorSPX(Constants.CANID_RearRightDriveMotor);
     rightRearMotor.setNeutralMode(NeutralMode.Brake);
-   
     if(Constants.RampWaitMode > 0) {
       leftFrontMotor.configOpenloopRamp(Constants.RampWaitMode);
       leftRearMotor.configOpenloopRamp(Constants.RampWaitMode);

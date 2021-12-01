@@ -27,7 +27,7 @@ public class PixyCam extends SubsystemBase {
   public String GetPath() {
     String path = "";
 
-    for (int count = 0; count < 300; count++) {
+    for (int count = 0; count < 250; count++) {
       if (!isCamera) {
         state = pixycam.init(1); // if no camera present, try to initialize
         pixycam.setLamp((byte)1, (byte)1);

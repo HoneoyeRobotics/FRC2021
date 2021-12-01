@@ -44,13 +44,13 @@ public class AutoPathRedB extends ParallelCommandGroup {
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, 73).withTimeout(4),
+      new RotatePID(drivetrain, 70).withTimeout(4),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 80, 0.5),
       new WaitCommand(waitTime),
       //reached point
       new ResetOdometry(drivetrain),
-      new RotatePID(drivetrain, -98).withTimeout(4),
+      new RotatePID(drivetrain, -105).withTimeout(4),
       new WaitCommand(waitTime), 
       new AutoDriveForward(drivetrain, 90, 0.5),
       new WaitCommand(waitTime),
