@@ -251,6 +251,11 @@ public class DriveTrain extends SubsystemBase {
     drive.arcadeDrive(xSpeed, zRotation);
   }
 
+  public void 
+  tankDrive(double left, double right) {
+    drive.tankDrive(left * -1, right * -1);
+  }
+
   // public void drive(double leftSpeed, double rightSpeed) {
   // drive.tankDrive(leftSpeed,rightSpeed);
   // SmartDashboard.putNumber("rightSpeed", rightSpeed);

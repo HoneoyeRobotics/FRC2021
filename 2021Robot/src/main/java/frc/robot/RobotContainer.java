@@ -60,7 +60,7 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
   private final DriveTrain drivetrain;
   private final Climber climber;
-  private final Camera camera;
+  //private final Camera camera = null;
   private final PowercellSystem powerCellSystem;
   // private final PixyCam pixycam;
   private final Joystick driverJoystick = new Joystick(0);
@@ -70,16 +70,21 @@ public class RobotContainer {
   public RobotContainer() {
 
     // construct subsystems
-    camera = new Camera();
+    //camera = new Camera();
     drivetrain = new DriveTrain();
     climber = new Climber();
     powerCellSystem = new PowercellSystem();
     //pixycam = new PixyCam();
 
     // default commands
-    ArcadeDrive arcadeDrive = new ArcadeDrive(() -> driverJoystick.getRawAxis(1) * (drivetrain.isReversed() ? 1 : -1),
-        () -> driverJoystick.getRawAxis(3) - driverJoystick.getRawAxis(2), drivetrain);
-    drivetrain.setDefaultCommand(arcadeDrive);
+    // ArcadeDrive arcadeDrive = new ArcadeDrive(() -> driverJoystick.getRawAxis(1) * (drivetrain.isReversed() ? 1 : -1),
+    //     () -> driverJoystick.getRawAxis(3) - driverJoystick.getRawAxis(2), drivetrain);
+    // drivetrain.setDefaultCommand(arcadeDrive);
+
+    TankDrive tankDrive = new TankDrive(() -> driverJoystick.getRawAxis(1) * -1,
+    () -> driverJoystick.getRawAxis(0), drivetrain);
+drivetrain.setDefaultCommand(tankDrive);
+
     //powerCellSystem.setDefaultCommand(GatherPowercells);
 
     // Configure the button bindings
@@ -177,21 +182,25 @@ SmartDashboard.putData(m_chooser);
 
   private void configureDriverButtonBindings() {
     // buttons being used on driver controller
+    final JoystickButton backButton = new JoystickButton(driverJoystick, 7);
+    final JoystickButton startButton = new JoystickButton(driverJoystick, 8);
     final JoystickButton aButton = new JoystickButton(driverJoystick, 1);
     final JoystickButton bButton = new JoystickButton(driverJoystick, 2);
     final JoystickButton xButton = new JoystickButton(driverJoystick, 3);
     
-    //final JoystickButton leftBumper = new JoystickButton(driverJoystick, 5);
-    //final JoystickButton rightBumper = new JoystickButton(driverJoystick, 6);
+    final JoystickButton leftBumper = new JoystickButton(driverJoystick, 5);
+    final JoystickButton rightBumper = new JoystickButton(driverJoystick, 6);
 
     // driver commands
 
+    backButton.whileHeld(new RetractClimber(climber));
+    startButton.whileHeld(new ElevateClimber(climber));
     aButton.whileHeld(new EngageExtraLift(climber));
     bButton.whileHeld(new DisengageExtraLift(climber));
-    xButton.whenPressed(new SwitchDriveAndCamera(drivetrain, camera));
+    //xButton.whenPressed(new SwitchDriveAndCamera(drivetrain, camera));
 
-    //leftBumper.whileHeld(new GatherPowercells(powerCellSystem));
-    //rightBumper.whileHeld(new DepositPowercells(powerCellSystem));
+    leftBumper.whileHeld(new GatherPowercells(powerCellSystem));
+    rightBumper.whileHeld(new DepositPowercells(powerCellSystem));
   }
 
   public void teleopInit() {
